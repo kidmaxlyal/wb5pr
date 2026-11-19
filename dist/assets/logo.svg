@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Знак бренда На колёсах</title>
+  <circle cx="12" cy="34" r="7" fill="#fff" stroke="#17131b" stroke-width="3" />
+  <circle cx="49" cy="34" r="7" fill="#fff" stroke="#17131b" stroke-width="3" />
+  <path d="M14 31h23l8-20h10" stroke="#17131b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="m44 11-2-5m11 5 3-5" stroke="#17131b" stroke-width="3" stroke-linecap="round" />
+  <path d="M21 30h14" stroke="#f42fc5" stroke-width="4" stroke-linecap="round" />
+  <circle cx="12" cy="34" r="2" fill="#d7ff35" />
+  <circle cx="49" cy="34" r="2" fill="#d7ff35" />
+</svg>

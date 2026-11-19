@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3ff3c" />
+    <meta name="description" content="Выбирай самокат на карте и бронируй поездку в городе." />
+    <title>НА КОЛЁСАХ — самокаты рядом</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="main.js"></script>
+<script type="module" src="motion.js"></script>
+<link rel="stylesheet" href="modern.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="На колёсах — на главную"><img class="brand-logo" src="assets/logo.svg" alt="" /><span>НА КОЛЁСАХ<span class="brand-dot">.</span></span></a>
+      <nav class="topnav" aria-label="Основная навигация"><a href="#rides">Самокаты</a><a href="#how">Как это работает</a><a href="#my-bookings">Мои брони <span class="nav-count" id="nav-count">0</span></a></nav>
+      <a class="top-cta" href="#rides">Найти самокат</a>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> САМОКАТЫ РЯДОМ</p>
+          <h1>Меньше пробок.<br /><span>Больше города.</span></h1>
+          <p class="hero-sub">Выбери свободный самокат на карте, укажи время и узнай цену до брони.</p>
+          <a class="hero-link" href="#rides">Найти самокат</a>
+        </div>
+<div class="motion-showcase" aria-label="Коллекция самокатов"><div class="showcase-word" aria-hidden="true">MOVE</div><div class="product-stage" data-tone="pink"><img id="showcase-image" src="assets/scooter-pink.png" alt="Самокат Volt S" fetchpriority="high"><div class="stage-info"><span>ТВОЙ ГОРОД. ТВОЙ РИТМ.</span><h2 id="showcase-name">Volt S</h2><p id="showcase-price">от 240 ₽ / час</p></div><a class="stage-book" href="#rides" aria-label="Выбрать самокат">+</a></div><div class="model-picker" aria-label="Посмотреть модель"><button class="model-choice is-active" type="button" data-model="pink" aria-pressed="true"><img src="assets/scooter-pink.png" alt=""><span>Volt S</span></button><button class="model-choice " type="button" data-model="acid" aria-pressed="false"><img src="assets/scooter-acid.png" alt=""><span>City Pop</span></button><button class="model-choice " type="button" data-model="cyan" aria-pressed="false"><img src="assets/scooter-cyan.png" alt=""><span>Long Way</span></button></div></div>
+      </section>
+
+      <section class="booking-section" id="rides">
+        <div class="wrap">
+          <div class="section-heading"><div><p class="eyebrow">ВЫБЕРИ СВОЙ САМОКАТ</p><h2>Найди свой <span>маршрут</span></h2></div><p class="section-note">Каждая модель —<br />со своим характером.</p></div>
+          <div class="filters" aria-label="Фильтры самокатов">
+            <label class="filter-control">ТИП САМОКАТА<select id="type-filter"><option value="all">Любой тип</option></select></label>
+            <label class="filter-control price-filter">МАКС. ЦЕНА ЗА ЧАС <span class="price-value"><span id="price-value">500</span> ₽</span><input id="price-filter" type="range" min="100" max="500" step="50" value="500" /></label>
+            <button class="reset-filter" type="button" id="reset-filters">Сбросить фильтры <span>↺</span></button>
+            <span class="result-count" id="result-count" aria-live="polite"></span>
+          </div>
+
+          <div class="map-layout">
+            <div class="map-column">
+              <div class="map-topline"><span>НА КАРТЕ <span class="map-live"><i></i> <span id="map-free-count">6 свободных</span></span></span><span>СТАНЦИЯ · ЦЕНТР</span></div>
+              <div class="station-map" id="station-map" aria-label="Карта расположения самокатов">
+                <div class="map-grid"></div><div class="map-park"><span>сквер<br />«салют»</span></div><div class="map-block block-a"></div><div class="map-block block-b"></div><div class="map-block block-c"></div><div class="map-water"></div><div class="map-road road-a"></div><div class="map-road road-b"></div><div class="map-road road-c"></div><div class="map-road road-d"></div><div class="map-crossing"></div><div class="map-label label-a">УЛ. БОЛЬШАЯ</div><div class="map-label label-b">САДОВОЕ КОЛЬЦО</div><div class="map-pin pin-hq"><span>НК</span></div><div class="map-hint">ВЫБЕРИ ТОЧКУ НА КАРТЕ <span>↗</span></div>
+                <div class="scooter-markers" id="scooter-markers"></div>
+              </div>
+              <div class="map-legend"><span><i class="legend-dot free"></i>Свободен</span><span><i class="legend-dot chosen"></i>Выбран</span><span><i class="legend-dot busy"></i>Занят</span></div>
+            </div>
+            <aside class="detail-panel" id="detail-panel" aria-live="polite"></aside>
+          </div>
+
+          <div class="fleet-header"><div><p class="eyebrow">ВЫБИРАЙ ПО ХАРАКТЕРУ</p><h3>Все самокаты</h3></div><div class="carousel-controls"><span id="carousel-counter" aria-live="polite">1–3 из 8</span><button type="button" id="carousel-prev" aria-label="Предыдущие самокаты">←</button><button type="button" id="carousel-next" aria-label="Следующие самокаты">→</button></div></div>
+          <div class="scooter-list" id="scooter-list" aria-label="Горизонтальная лента самокатов"></div>
+        </div>
+      </section>
+
+      <section class="how-section wrap" id="how"><div class="how-intro"><p class="eyebrow">КАК ЭТО РАБОТАЕТ</p><h2>Выбрал.<br /><span>Забронировал.</span></h2></div><div class="how-steps"><article><b>1</b><h3>Выбери</h3><p>Найди самокат на карте или в списке.</p></article><article><b>2</b><h3>Забронируй</h3><p>Укажи время и увидь стоимость сразу.</p></article><article><b>3</b><h3>Поехали</h3><p>Бронь сохранится здесь, пока ты её не отменишь.</p></article></div></section>
+
+      <section class="my-bookings" id="my-bookings"><div class="wrap"><div class="section-heading bookings-heading"><div><p class="eyebrow">ТВОИ ПОЕЗДКИ</p><h2 tabindex="-1">Мои <span>брони</span></h2></div><button type="button" class="clear-bookings" id="clear-bookings" hidden>Сбросить всё <span>×</span></button></div><div id="bookings-list" class="bookings-list" aria-live="polite"></div><p class="demo-note"><span>i</span> Учебное демо: бронирования хранятся только в этом браузере. Реальная поездка не оформляется.</p></div></section>
+    </main>
+    <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#top"><img class="brand-logo" src="assets/logo.svg" alt="" /><span>НА КОЛЁСАХ<span class="brand-dot">.</span></span></a><span>ЕДЕМ В СВОЁМ РИТМЕ</span><a href="#top">К началу</a></div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <button class="back-top" id="back-top" type="button" aria-label="Вернуться наверх" title="Наверх">Наверх</button>
+  </body>
+</html>
