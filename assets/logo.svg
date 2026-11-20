@@ -1,10 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 44" fill="none" role="img" aria-labelledby="title">
-  <title id="title">Знак бренда На колёсах</title>
-  <circle cx="12" cy="34" r="7" fill="#fff" stroke="#17131b" stroke-width="3" />
-  <circle cx="49" cy="34" r="7" fill="#fff" stroke="#17131b" stroke-width="3" />
-  <path d="M14 31h23l8-20h10" stroke="#17131b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="m44 11-2-5m11 5 3-5" stroke="#17131b" stroke-width="3" stroke-linecap="round" />
-  <path d="M21 30h14" stroke="#f42fc5" stroke-width="4" stroke-linecap="round" />
-  <circle cx="12" cy="34" r="2" fill="#d7ff35" />
-  <circle cx="49" cy="34" r="2" fill="#d7ff35" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 48" fill="none">
+  <title>Киберпанк-самокат</title>
+  <path d="M8 39h68" stroke="#c9b6cf" stroke-width="1.5"/>
+  <circle cx="20" cy="33" r="10" fill="#24202b"/>
+  <circle cx="65" cy="33" r="10" fill="#24202b"/>
+  <path d="M12 33a8 8 0 0 1 8-8m0 16a8 8 0 0 0 8-8M57 33a8 8 0 0 1 8-8m0 16a8 8 0 0 0 8-8" stroke="#ff65be" stroke-width="2"/>
+  <path d="M20 33 29 25h19l11-15-3-4h13l4 4H62l3 23h-5l-3-16-8 17H27z" fill="#24202b" stroke="#24202b" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M26 30h19l4-3M60 12l3 15" stroke="#ff65be" stroke-width="2.5" stroke-linecap="square"/>
+  <path d="m31 34 4-4m2 4 4-4m22-21h5" stroke="#dbff58" stroke-width="2"/>
+  <circle cx="20" cy="33" r="2" fill="#f8f4fa"/>
+  <circle cx="65" cy="33" r="2" fill="#f8f4fa"/>
 </svg>

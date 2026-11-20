@@ -8,15 +8,17 @@
     <title>НА КОЛЁСАХ — самокаты рядом</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="style.css" />
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script type="module" src="main.js"></script>
 <script type="module" src="motion.js"></script>
 <link rel="stylesheet" href="modern.css">
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#top" aria-label="На колёсах — на главную"><img class="brand-logo" src="assets/logo.svg" alt="" /><span>НА КОЛЁСАХ<span class="brand-dot">.</span></span></a>
+      <a class="brand" href="#top" aria-label="На колёсах — на главную"><img class="brand-logo" src="assets/logo.svg" alt="" /><span>НА КОЛЁСАХ</span></a>
       <nav class="topnav" aria-label="Основная навигация"><a href="#rides">Самокаты</a><a href="#how">Как это работает</a><a href="#my-bookings">Мои брони <span class="nav-count" id="nav-count">0</span></a></nav>
       <a class="top-cta" href="#rides">Найти самокат</a>
     </header>
@@ -29,7 +31,7 @@
           <p class="hero-sub">Выбери свободный самокат на карте, укажи время и узнай цену до брони.</p>
           <a class="hero-link" href="#rides">Найти самокат</a>
         </div>
-<div class="motion-showcase" aria-label="Коллекция самокатов"><div class="showcase-word" aria-hidden="true">MOVE</div><div class="product-stage" data-tone="pink"><img id="showcase-image" src="assets/scooter-pink.png" alt="Самокат Volt S" fetchpriority="high"><div class="stage-info"><span>ТВОЙ ГОРОД. ТВОЙ РИТМ.</span><h2 id="showcase-name">Volt S</h2><p id="showcase-price">от 240 ₽ / час</p></div><a class="stage-book" href="#rides" aria-label="Выбрать самокат">+</a></div><div class="model-picker" aria-label="Посмотреть модель"><button class="model-choice is-active" type="button" data-model="pink" aria-pressed="true"><img src="assets/scooter-pink.png" alt=""><span>Volt S</span></button><button class="model-choice " type="button" data-model="acid" aria-pressed="false"><img src="assets/scooter-acid.png" alt=""><span>City Pop</span></button><button class="model-choice " type="button" data-model="cyan" aria-pressed="false"><img src="assets/scooter-cyan.png" alt=""><span>Long Way</span></button></div></div>
+<div class="motion-showcase" aria-label="Коллекция самокатов"><div class="product-stage" data-tone="pink"><img id="showcase-image" src="assets/scooter-pink.png" alt="Самокат Volt S" fetchpriority="high"><div class="stage-info"><span>ТВОЙ ГОРОД. ТВОЙ РИТМ.</span><h2 id="showcase-name">Volt S</h2><p id="showcase-price">от 240 ₽ / час</p></div><a class="stage-book" href="#rides" aria-label="Выбрать самокат">+</a></div><div class="model-picker" aria-label="Посмотреть модель"><button class="model-choice is-active" type="button" data-model="pink" aria-pressed="true"><img src="assets/scooter-pink.png" alt=""><span>Volt S</span></button><button class="model-choice " type="button" data-model="acid" aria-pressed="false"><img src="assets/scooter-acid.png" alt=""><span>City Pop</span></button><button class="model-choice " type="button" data-model="cyan" aria-pressed="false"><img src="assets/scooter-cyan.png" alt=""><span>Long Way</span></button></div></div>
       </section>
 
       <section class="booking-section" id="rides">
@@ -44,8 +46,10 @@
 
           <div class="map-layout">
             <div class="map-column">
-              <div class="map-topline"><span>НА КАРТЕ <span class="map-live"><i></i> <span id="map-free-count">6 свободных</span></span></span><span>СТАНЦИЯ · ЦЕНТР</span></div>
+              <div class="map-topline"><span>НА КАРТЕ <span class="map-live"><i></i> <span id="map-free-count">6 свободных</span></span></span><span>САНКТ-ПЕТЕРБУРГ</span></div>
               <div class="station-map" id="station-map" aria-label="Карта расположения самокатов">
+                <div id="city-map" aria-label="Карта Санкт-Петербурга"></div>
+                <p id="map-status" class="map-status" role="status">Карта недоступна. Показана учебная схема.</p>
                 <div class="map-grid"></div><div class="map-park"><span>сквер<br />«салют»</span></div><div class="map-block block-a"></div><div class="map-block block-b"></div><div class="map-block block-c"></div><div class="map-water"></div><div class="map-road road-a"></div><div class="map-road road-b"></div><div class="map-road road-c"></div><div class="map-road road-d"></div><div class="map-crossing"></div><div class="map-label label-a">УЛ. БОЛЬШАЯ</div><div class="map-label label-b">САДОВОЕ КОЛЬЦО</div><div class="map-pin pin-hq"><span>НК</span></div><div class="map-hint">ВЫБЕРИ ТОЧКУ НА КАРТЕ <span>↗</span></div>
                 <div class="scooter-markers" id="scooter-markers"></div>
               </div>
@@ -63,7 +67,7 @@
 
       <section class="my-bookings" id="my-bookings"><div class="wrap"><div class="section-heading bookings-heading"><div><p class="eyebrow">ТВОИ ПОЕЗДКИ</p><h2 tabindex="-1">Мои <span>брони</span></h2></div><button type="button" class="clear-bookings" id="clear-bookings" hidden>Сбросить всё <span>×</span></button></div><div id="bookings-list" class="bookings-list" aria-live="polite"></div><p class="demo-note"><span>i</span> Учебное демо: бронирования хранятся только в этом браузере. Реальная поездка не оформляется.</p></div></section>
     </main>
-    <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#top"><img class="brand-logo" src="assets/logo.svg" alt="" /><span>НА КОЛЁСАХ<span class="brand-dot">.</span></span></a><span>ЕДЕМ В СВОЁМ РИТМЕ</span><a href="#top">К началу</a></div></footer>
+    <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#top"><img class="brand-logo" src="assets/logo.svg" alt="" /><span>НА КОЛЁСАХ</span></a><span>ЕДЕМ В СВОЁМ РИТМЕ</span><a href="#top">К началу</a></div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <button class="back-top" id="back-top" type="button" aria-label="Вернуться наверх" title="Наверх">Наверх</button>
   </body>

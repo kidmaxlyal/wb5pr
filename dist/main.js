@@ -10,6 +10,7 @@ const els = {
   toast: $("#toast"), clear: $("#clear-bookings"),
 };
 let toastTimer;
+let cityMap;
 const revealObserver = "IntersectionObserver" in window
   ? new IntersectionObserver((entries) => entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -69,6 +70,39 @@ function renderFilters() {
   els.type.innerHTML = `<option value="all">Любой тип</option>${types.map((type) => `<option value="${type}">${type}</option>`).join("")}`;
 }
 
+function positionMapMarkers() {
+  if (!cityMap) return;
+  for (const marker of els.map.children) {
+    const scooter = scooters.find(({ id }) => id === marker.dataset.scooter);
+    const point = cityMap.latLngToContainerPoint(scooter.coordinates);
+    marker.style.setProperty("--x", `${point.x}px`);
+    marker.style.setProperty("--y", `${point.y}px`);
+  }
+}
+
+function initCityMap() {
+  if (!window.L) return;
+  const map = $("#city-map");
+  const status = $("#map-status");
+  map.parentElement.classList.add("has-city-map");
+  cityMap = window.L.map(map, { scrollWheelZoom: false, zoomAnimation: false, attributionControl: false });
+  cityMap.fitBounds(scooters.map(({ coordinates }) => coordinates), { padding: [38, 44], maxZoom: 14 });
+  const tiles = window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19,
+  });
+  window.L.control.attribution({ prefix: false }).addTo(cityMap);
+  tiles.on("tileerror", () => {
+    status.hidden = false;
+    status.textContent = "Часть карты не загрузилась. Самокаты доступны в каталоге.";
+  });
+  tiles.on("load", () => { status.hidden = Boolean(map.querySelector(".leaflet-tile-loaded")); });
+  status.textContent = "Загружаем карту Санкт-Петербурга…";
+  tiles.addTo(cityMap);
+  cityMap.on("move resize", positionMapMarkers);
+  requestAnimationFrame(() => cityMap.invalidateSize());
+}
+
 function renderMap(items) {
   els.map.innerHTML = items.map((scooter) => {
     const occupied = isOccupied(scooter);
@@ -76,6 +110,7 @@ function renderMap(items) {
     const status = occupied ? "Занят" : selected ? "Выбран" : "Свободен";
     return `<button class="map-scooter ${occupied ? "is-busy" : ""} ${selected ? "is-selected" : ""}" style="--x:${scooter.x}%;--y:${scooter.y}%" type="button" data-scooter="${scooter.id}" aria-label="${scooter.name}, ${status}, ${formatPrice(scooter.pricePerHour)} рублей в час" aria-pressed="${selected}" ${occupied ? "disabled" : ""}><span class="scooter-glyph" aria-hidden="true">⌁</span><span class="marker-label">${scooter.name}</span></button>`;
   }).join("");
+  positionMapMarkers();
 }
 
 function renderList(items) {
@@ -224,4 +259,7 @@ function init() {
   updateCarouselControls();
 }
 
-init();
+window.addEventListener("DOMContentLoaded", () => {
+  initCityMap();
+  init();
+});
